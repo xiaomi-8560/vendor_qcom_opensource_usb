@@ -102,6 +102,9 @@ if [ "$(getprop ro.build.type)" != "user" ]; then
 	              "msm8998" | "sdm660" | "apq8098_latv")
 		          setprop persist.vendor.usb.config diag,serial_cdev,rmnet,adb
 		      ;;
+	              "monaco")
+		          setprop persist.vendor.usb.config diag,qdss,rmnet,adb
+		      ;;
 	              "sdm845" | "sdm710")
 		          setprop persist.vendor.usb.config diag,serial_cdev,rmnet,dpl,adb
 		      ;;
