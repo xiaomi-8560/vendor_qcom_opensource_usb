@@ -64,9 +64,10 @@
 #
 
 prop_enabled=`getprop persist.vendor.usb.enable_ftrace 0`
+consolidate=$(cat /proc/version | grep "consolidate")
 
 # bail out if its perf config
-if [ "$prop_enabled" == "0" -a ! -d /sys/module/msm_rtb ]; then
+if [ "$prop_enabled" == "0" -a "$consolidate" == "" ]; then
     return
 fi
 
@@ -77,12 +78,12 @@ if [ -d $tracefs ]; then
     cd $tracefs
 
     # global kprobe events
-    echo 'p:usb_gadget/p_config_usb_cfg_link_0 config_usb_cfg_link cfg=+0(+0($arg1)):string func=+0(+0($arg2)):string' >> kprobe_events
-    echo 'r:usb_gadget/r_config_usb_cfg_link_0 config_usb_cfg_link ret=$retval:s32' >> kprobe_events
-    echo 'p:usb_gadget/p_config_usb_cfg_unlink_0 config_usb_cfg_unlink cfg=+0(+0($arg1)):string func=+0(+0($arg2)):string' >> kprobe_events
-    echo 'p:usb_gadget/p_gadget_dev_desc_UDC_store_0 gadget_dev_desc_UDC_store udc=+0($arg2):string' >> kprobe_events
-    echo 'r:usb_gadget/r_gadget_dev_desc_UDC_store_0 gadget_dev_desc_UDC_store ret=$retval:s32' >> kprobe_events
-    echo 'p:usb_gadget/p_unregister_gadget_item_0 unregister_gadget_item gadget=+0(+0($arg1)):string' >> kprobe_events
+    echo 'p:usb_gadget/ config_usb_cfg_link cfg=+0(+0($arg1)):string func=+0(+0($arg2)):string' >> kprobe_events
+    echo 'r:usb_gadget/ config_usb_cfg_link ret=$retval:s32' >> kprobe_events
+    echo 'p:usb_gadget/ config_usb_cfg_unlink cfg=+0(+0($arg1)):string func=+0(+0($arg2)):string' >> kprobe_events
+    echo 'p:usb_gadget/ gadget_dev_desc_UDC_store udc=+0($arg2):string' >> kprobe_events
+    echo 'r:usb_gadget/ gadget_dev_desc_UDC_store ret=$retval:s32' >> kprobe_events
+    echo 'p:usb_gadget/ unregister_gadget_item gadget=+0(+0($arg1)):string' >> kprobe_events
 
     # usb instances
     mkdir instances/usb
