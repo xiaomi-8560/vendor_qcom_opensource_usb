@@ -26,6 +26,10 @@
 # OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
 # IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
+
+# Changes from Qualcomm Innovation Center are provided under the following license:
+# Copyright (c) 2023 Qualcomm Innovation Center, Inc. All rights reserved.
+# SPDX-License-Identifier: BSD-3-Clause-Clear
 #
 
 # Set platform variables
@@ -46,8 +50,9 @@ target=`getprop ro.board.platform`
 #
 # Override USB default composition
 #
-# If USB persist config not set, set default configuration
-if [ "$(getprop persist.vendor.usb.config)" == "" -a "$(getprop ro.build.type)" != "user" ]; then
+if [ "$(getprop ro.build.type)" != "user" ]; then
+  # If USB persist config not set, set default configuration
+  if [ "$(getprop persist.vendor.usb.config)" == "" ]; then
     if [ "$esoc_name" != "" ]; then
 	  setprop persist.vendor.usb.config diag,diag_mdm,qdss,qdss_mdm,serial_cdev,dpl,rmnet,adb
     else
@@ -115,6 +120,9 @@ if [ "$(getprop persist.vendor.usb.config)" == "" -a "$(getprop ro.build.type)" 
 	      ;;
 	  esac
       fi
+  fi
+else # for user build let persist.sys.usb.config dictate the default composition
+    setprop persist.vendor.usb.config ""
 fi
 
 # This check is needed for GKI 1.0 targets where QDSS is not available
