@@ -6,10 +6,15 @@ PRODUCT_PROPERTY_OVERRIDES += vendor.usb.rndis.func.name=gsi
 PRODUCT_PROPERTY_OVERRIDES += vendor.usb.rmnet.func.name=gsi
 PRODUCT_PROPERTY_OVERRIDES += vendor.usb.rmnet.inst.name=rmnet
 PRODUCT_PROPERTY_OVERRIDES += vendor.usb.dpl.inst.name=dpl
-PRODUCT_PROPERTY_OVERRIDES += vendor.usb.controller=a600000.dwc3
+
+ifneq ($(filter blair,$(TARGET_BOARD_PLATFORM)),)
+  PRODUCT_PROPERTY_OVERRIDES += vendor.usb.controller=4e00000.dwc3
+else
+  PRODUCT_PROPERTY_OVERRIDES += vendor.usb.controller=a600000.dwc3
+endif
 
 # QDSS uses SW path on these targets
-ifneq ($(filter lahaina taro kalama pineapple,$(TARGET_BOARD_PLATFORM)),)
+ifneq ($(filter lahaina taro blair kalama pineapple,$(TARGET_BOARD_PLATFORM)),)
   PRODUCT_PROPERTY_OVERRIDES += vendor.usb.qdss.inst.name=qdss_sw
 else
   PRODUCT_PROPERTY_OVERRIDES += vendor.usb.qdss.inst.name=qdss
