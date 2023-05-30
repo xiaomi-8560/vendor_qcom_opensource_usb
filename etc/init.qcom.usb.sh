@@ -106,7 +106,7 @@ if [ "$(getprop ro.build.type)" != "user" ]; then
 		          setprop persist.vendor.usb.config diag,serial_cdev,rmnet,dpl,adb
 		      ;;
 	              "msmnile" | "sm6150" | "trinket" | "lito" | "atoll" | "bengal" | "lahaina" | "holi" | \
-				  "taro" | "kalama" | "pineapple")
+				  "taro" | "kalama" | "pineapple" | "blair")
 			  setprop persist.vendor.usb.config diag,serial_cdev,rmnet,dpl,qdss,adb
 		      ;;
 		      "gen4")
