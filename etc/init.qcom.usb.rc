@@ -126,12 +126,14 @@ on post-fs-data
     chown system usb /config/usb_gadget/g1/os_desc/qw_sign
     chown system usb /config/usb_gadget/g1/os_desc/use
     mkdir /config/usb_gadget/g1/configs/b.1/strings/0x409 0770 system usb
+    chown system usb /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration
 
     # Create second ConfigFS gadget instance for dual-device configuration
     mkdir /config/usb_gadget/g2 0770 system usb
     mkdir /config/usb_gadget/g2/strings/0x409 0770 system usb
     mkdir /config/usb_gadget/g2/configs/b.1 0770 system usb
     mkdir /config/usb_gadget/g2/configs/b.1/strings/0x409 0770 system usb
+    chown system usb /config/usb_gadget/g2/configs/b.1/strings/0x409/configuration
     chown system usb /config/usb_gadget/g2/UDC
     chown system usb /config/usb_gadget/g2/bDeviceClass
     chown system usb /config/usb_gadget/g2/bDeviceProtocol
