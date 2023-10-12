@@ -99,6 +99,9 @@ on post-fs-data
     mkdir /config/usb_gadget/g1/functions/qdss.qdss 0770 system usb
     mkdir /config/usb_gadget/g1/functions/qdss.qdss_mdm 0770 system usb
     mkdir /config/usb_gadget/g1/functions/qdss.qdss_sw 0770 system usb
+    chown system usb /config/usb_gadget/g1/functions/qdss.qdss/enable_debug_inface
+    chown system usb /config/usb_gadget/g1/functions/qdss.qdss_mdm/enable_debug_inface
+    chown system usb /config/usb_gadget/g1/functions/qdss.qdss_sw/enable_debug_inface
     mkdir /config/usb_gadget/g1/functions/rndis_bam.rndis 0770 system usb
     mkdir /config/usb_gadget/g1/functions/rndis.rndis 0770 system usb
     mkdir /config/usb_gadget/g1/functions/rmnet_bam.rmnet 0770 system usb
