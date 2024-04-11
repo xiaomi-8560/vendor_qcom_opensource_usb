@@ -116,6 +116,7 @@ if [ -d $tracefs ]; then
 
     #DWC3 core runtime
     echo 'name~"a600000.*"' > events/rpm/filter
+    echo 'name~"a400000.*"' > events/rpm/filter
     echo 1 > events/rpm/rpm_resume/enable
     echo 1 > events/rpm/rpm_suspend/enable
     echo 1 > events/rpm/rpm_return_int/enable
