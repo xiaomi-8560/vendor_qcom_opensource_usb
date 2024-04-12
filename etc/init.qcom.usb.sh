@@ -58,7 +58,11 @@ if [ "$(getprop ro.build.type)" != "user" ]; then
     else
 	  case "$(getprop ro.baseband)" in
 	      "apq")
-	          setprop persist.vendor.usb.config diag,adb
+		if [[ "$target" == "niobe" ]]; then
+			setprop persist.vendor.usb.config diag,qdss,adb
+		else
+			setprop persist.vendor.usb.config diag,adb
+		fi
 	      ;;
 	      *)
 	      case "$soc_hwplatform" in
